@@ -1,0 +1,99 @@
+@startuml
+title 0xe7a8538c7fd90118472bd2dc98c23c7afff2e436105420389db70f00a3fbe20e
+participant "0x2d40..d45c" as 2d40d45c 
+participant "0xd061..fce0" as d061fce0 <<Token Minter>>
+participant "0x2f50..46bb" as 2f5046bb <<Gauge Controller>>
+participant "0x05ca..233a" as 05ca233a <<Curve.fi ibAUD+sAUD-f Gauge Deposit (ibAUD+sAUD-f-gauge)>><<Liquidity Gauge>>
+participant "0x5ae8..d846" as 5ae8d846 <<Liquidity Gauge>>
+participant "0xd533..cd52" as d533cd52 <<Curve DAO Token (CRV)>><<Curve DAO Token>>
+participant "0x8e0c..0d16" as 8e0c0d16 <<Voting Escrow Delegation Proxy>>
+participant "0xd30d..5ac8" as d30d5ac8 <<Voting Escrow Boost Delegation (veBoost)>><<Voting Escrow Delegation>>
+participant "0x5f3b..e2a2" as 5f3be2a2 <<Vote-escrowed CRV (veCRV)>><<Voting Escrow>>
+
+note over 2d40d45c
+Nonce: 10,499
+Gas Price: 103.085545907 Gwei
+Gas Limit: 592,971
+Gas Used: 373,213
+Tx Fee: 0.038 ETH
+end note
+
+2d40d45c -> d061fce0: mint(\ngauge_addr: 0x05ca..233A)\n371,681 gas
+activate d061fce0
+d061fce0 -> 2f5046bb: gauge_types(\n_addr: 0x05ca..233A)\n2,562 gas
+activate 2f5046bb
+return\n0
+d061fce0 -> 05ca233a: user_checkpoint(\naddr: 0x2D40..d45C)\n293,296 gas
+activate 05ca233a
+05ca233a ->> 5ae8d846: user_checkpoint(\naddr: 0x2D40..d45C)\n290,624 gas
+activate 5ae8d846 #809ECB
+05ca233a -[#3471CD]> d533cd52: future_epoch_time_write()\n2,506 gas
+activate d533cd52
+return\n1,660,429,048
+05ca233a -[#3471CD]> d533cd52: rate()\n2,969 gas
+activate d533cd52
+return\n7,,327,853,447,857,530,670
+05ca233a -[#3471CD]> 2f5046bb: checkpoint_gauge(\naddr: 0x05ca..233A)\n104,045 gas
+activate 2f5046bb
+return
+05ca233a -[#3471CD]> 2f5046bb: gauge_relative_weight(\naddr: 0x05ca..233A,\ntime: 1,631,145,600)\n6,060 gas
+activate 2f5046bb
+return\n6,690,786,044,161,274
+05ca233a -[#3471CD]> 8e0c0d16: adjusted_balance_of(\n_account: 0x2D40..d45C)\n27,120 gas
+activate 8e0c0d16
+8e0c0d16 -> d30d5ac8: adjusted_balance_of(\n_account: 0x2D40..d45C)\n22,131 gas
+activate d30d5ac8
+d30d5ac8 -> 5f3be2a2: balanceOf(\naddr: 0x2D40..d45C)\n12,065 gas
+activate 5f3be2a2
+return\n6,905,,633,907,077,473,130,780
+return\n6,905,,633,907,077,473,130,780
+note right of d30d5ac8: \n10,066 gas
+return\n6,905,,633,907,077,473,130,780
+note right of 8e0c0d16: \n4,989 gas
+05ca233a -[#3471CD]> 5f3be2a2: totalSupply()\n12,754 gas
+activate 5f3be2a2
+return\n269,996,979,,294,687,075,207,984,900
+return
+note right of 5ae8d846: \n135,170 gas
+return\ntrue
+note right of 05ca233a: \n2,672 gas
+d061fce0 -> 05ca233a: integrate_fraction(\narg0: 0x2D40..d45C)\n1,561 gas
+activate 05ca233a
+05ca233a ->> 5ae8d846: integrate_fraction(\narg0: 0x2D40..d45C)\n1,389 gas
+activate 5ae8d846 #809ECB
+return
+return\n1,851,466,727,124,883
+note right of 05ca233a: \n172 gas
+d061fce0 -> d533cd52: mint(\n_to: 0x2D40..d45C,\n_value: 1,851,466,727,124,883)\n17,512 gas
+activate d533cd52
+return\ntrue
+return
+note right of d061fce0: \n56,750 gas
+
+note over d061fce0 #aqua
+Minted:
+recipient: 0x2D40..d45C,
+gauge: 0x05ca..233A,
+minted: 1,851,466,727,124,883
+end note
+note over 05ca233a #aqua
+UpdateLiquidityLimit:
+user: 0x2D40..d45C,
+original_balance: 999,797,525,963,898,913,
+original_supply: 1,202,557,,774,862,015,670,773,867,
+working_balance: 999,797,525,963,898,913,
+working_supply: 481,395,,477,463,914,833,272,757
+UpdateLiquidityLimit:
+user: 0x2D40..d45C,
+original_balance: 999,797,525,963,898,913,
+original_supply: 1,202,557,,774,862,015,670,773,867,
+working_balance: 999,797,525,963,898,913,
+working_supply: 481,395,,477,463,914,833,272,757
+end note
+note over d533cd52 #aqua
+Transfer:
+_from: 0x0000..0000,
+_to: 0x2D40..d45C,
+_value: 1,851,466,727,124,883
+end note
+@endumls
