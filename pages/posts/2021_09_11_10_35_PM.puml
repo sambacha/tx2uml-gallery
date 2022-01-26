@@ -1,0 +1,65 @@
+@startuml
+title 0xe7a8538c7fd90118472bd2dc98c23c7afff2e436105420389db70f00a3fbe20e
+caption  Thu, 09 Sep 2021 09:59:40 GMT
+participant "0x2d40..d45c" as 2d40d45c 
+participant "0xd061..fce0" as d061fce0 <<Token Minter>>
+participant "0x2f50..46bb" as 2f5046bb <<Gauge Controller>>
+participant "0x05ca..233a" as 05ca233a <<Curve.fi ibAUD+sAUD-f Gauge Deposit (ibAUD+sAUD-f-gauge)>><<Liquidity Gauge>>
+participant "0xd533..cd52" as d533cd52 <<Curve DAO Token (CRV)>><<Curve DAO Token>>
+participant "0x8e0c..0d16" as 8e0c0d16 <<Voting Escrow Delegation Proxy>>
+participant "0xd30d..5ac8" as d30d5ac8 <<Voting Escrow Boost Delegation (veBoost)>><<Voting Escrow Delegation>>
+participant "0x5f3b..e2a2" as 5f3be2a2 <<Vote-escrowed CRV (veCRV)>><<Voting Escrow>>
+
+note over 2d40d45c
+Nonce: 10,499
+Gas Price: 103.085545907 Gwei
+Gas Limit: 592,971
+Gas Used: 373,213
+Tx Fee: 0.038 ETH
+end note
+
+2d40d45c -> d061fce0: mint\n371,681 gas
+activate d061fce0
+d061fce0 -> 2f5046bb: gauge_types\n2,562 gas
+activate 2f5046bb
+return
+d061fce0 -> 05ca233a: user_checkpoint\n293,296 gas
+activate 05ca233a
+05ca233a -> d533cd52: future_epoch_time_write\n2,506 gas
+activate d533cd52
+return
+05ca233a -> d533cd52: rate\n2,969 gas
+activate d533cd52
+return
+05ca233a -> 2f5046bb: checkpoint_gauge\n104,045 gas
+activate 2f5046bb
+return
+05ca233a -> 2f5046bb: gauge_relative_weight\n6,060 gas
+activate 2f5046bb
+return
+05ca233a -> 8e0c0d16: adjusted_balance_of\n27,120 gas
+activate 8e0c0d16
+8e0c0d16 -> d30d5ac8: adjusted_balance_of\n22,131 gas
+activate d30d5ac8
+d30d5ac8 -> 5f3be2a2: balanceOf\n12,065 gas
+activate 5f3be2a2
+return
+return
+note right of d30d5ac8: \n10,066 gas
+return
+note right of 8e0c0d16: \n4,989 gas
+05ca233a -> 5f3be2a2: totalSupply\n12,754 gas
+activate 5f3be2a2
+return
+return
+note right of 05ca233a: \n137,842 gas
+d061fce0 -> 05ca233a: integrate_fraction\n1,561 gas
+activate 05ca233a
+return
+d061fce0 -> d533cd52: mint\n17,512 gas
+activate d533cd52
+return
+return
+note right of d061fce0: \n56,750 gas
+
+@endumls

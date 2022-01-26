@@ -1,0 +1,97 @@
+@startuml
+title 0x0717e2dd70a30f00b9dcb60e57fc8a0453e6dc9f949204a63016c97eecc503b8
+caption  Sun, 12 Sep 2021 08:32:20 GMT
+participant "0x1fd3..b81b" as 1fd3b81b 
+participant "0xa100..d2db" as a100d2db 
+participant "0xc02a..6cc2" as c02a6cc2 <<Wrapped Ether (WETH)>><<WETH9>>
+participant "0xc2a8..c726" as c2a8c726 
+participant "0x853d..b99e" as 853db99e <<Frax (FRAX)>><<FRAXStablecoin>>
+participant "0xdac1..1ec7" as dac11ec7 <<Tether USD (USDT)>><<TetherToken>>
+participant "0x11b8..97f6" as 11b897f6 <<UniswapV3Pool>>
+participant "0xe06f..8a6a" as e06f8a6a <<SushiSwap LP Token (SLP)>><<UniswapV2Pair>>
+participant "0x6b35..0fe2" as 6b350fe2 <<SushiToken (SUSHI)>><<SushiToken>>
+participant "0x6cbe..98e9" as 6cbe98e9 <<ShibaSwap LP Token (SSLP)>><<UniswapV2Pair>>
+
+note over 1fd3b81b
+Nonce: 20,160
+Gas Price: 89.56101862 Gwei
+Gas Limit: 562,514
+Gas Used: 281,257
+Tx Fee: 0.025 ETH
+end note
+
+1fd3b81b -> a100d2db: 0xc3151faa\n181,469 gas
+activate a100d2db
+a100d2db -> c02a6cc2: balanceOf\n534 gas
+activate c02a6cc2
+return
+a100d2db -> c2a8c726: swap\n157,771 gas
+activate c2a8c726
+c2a8c726 -> 853db99e: transfer\n9,123 gas
+activate 853db99e
+return
+c2a8c726 -> dac11ec7: balanceOf\n1,031 gas
+activate dac11ec7
+return
+c2a8c726 -> a100d2db: 0xfa461e33\n122,250 gas
+activate a100d2db
+a100d2db -> 11b897f6: swap\n116,513 gas
+activate 11b897f6
+11b897f6 -> dac11ec7: transfer\n10,501 gas
+activate dac11ec7
+return
+11b897f6 -> c02a6cc2: balanceOf\n534 gas
+activate c02a6cc2
+return
+11b897f6 -> a100d2db: 0xfa461e33\n75,813 gas
+activate a100d2db
+a100d2db -> c02a6cc2: transfer\n8,862 gas
+activate c02a6cc2
+return
+a100d2db -> e06f8a6a: swap\n31,865 gas
+activate e06f8a6a
+e06f8a6a -> 6b350fe2: transfer\n8,925 gas
+activate 6b350fe2
+return
+e06f8a6a -> 6b350fe2: balanceOf\n578 gas
+activate 6b350fe2
+return
+e06f8a6a -> 853db99e: balanceOf\n666 gas
+activate 853db99e
+return
+return
+note right of e06f8a6a: \n21,696 gas
+a100d2db -> 6cbe98e9: swap\n28,775 gas
+activate 6cbe98e9
+6cbe98e9 -> c02a6cc2: transfer\n6,062 gas
+activate c02a6cc2
+return
+6cbe98e9 -> 6b350fe2: balanceOf\n578 gas
+activate 6b350fe2
+return
+6cbe98e9 -> c02a6cc2: balanceOf\n534 gas
+activate c02a6cc2
+return
+return
+note right of 6cbe98e9: \n21,601 gas
+return
+note right of a100d2db: \n6,311 gas
+11b897f6 -> c02a6cc2: balanceOf\n534 gas
+activate c02a6cc2
+return
+return
+note right of 11b897f6: \n29,131 gas
+return
+note right of a100d2db: \n5,737 gas
+c2a8c726 -> dac11ec7: balanceOf\n1,031 gas
+activate dac11ec7
+return
+return
+note right of c2a8c726: \n24,336 gas
+a100d2db -> c02a6cc2: balanceOf\n534 gas
+activate c02a6cc2
+return
+return
+note right of a100d2db: \n22,630 gas
+
+@endumls
