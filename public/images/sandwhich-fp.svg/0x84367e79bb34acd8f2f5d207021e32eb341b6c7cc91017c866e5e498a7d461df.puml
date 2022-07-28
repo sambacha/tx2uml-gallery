@@ -1,0 +1,1059 @@
+@startuml
+title 0x84367e79bb34acd8f2f5d207021e32eb341b6c7cc91017c866e5e498a7d461df
+caption  Fri, 15 Jul 2022 00:03:32 GMT
+participant "0xa3f6..9c5f" as a3f69c5f 
+participant "0x7976..792f" as 7976792f 
+participant "0xa0b8..eb48" as a0b8eb48 <<USD Coin (USDC)>><<FiatTokenProxy>>
+participant "0xa232..bdcf" as a232bdcf <<FiatTokenV2_1>>
+participant "0x6b17..1d0f" as 6b171d0f <<Dai Stablecoin (DAI)>><<Dai>>
+participant "0x57ab..5f51" as 57ab5f51 <<Synth sUSD (sUSD)>><<ProxyERC20>>
+participant "0x10a5..275f" as 10a5275f <<Synth sUSD (sUSD)>><<MultiCollateralSynth>>
+participant "0x05a9..43e8" as 05a943e8 <<TokenState>>
+participant "0xdac1..1ec7" as dac11ec7 <<Tether USD (USDT)>><<TetherToken>>
+participant "0xc02a..6cc2" as c02a6cc2 <<Wrapped Ether (WETH)>><<WETH9>>
+participant "0xba12..f2c8" as ba12f2c8 <<Vault>>
+participant "0xce88..9f9f" as ce889f9f <<ProtocolFeesCollector>>
+participant "0x7d27..c7a9" as 7d27c7a9 <<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0xc684..5baf" as c6845baf <<LendingPool>>
+participant "0xf554..bbd5" as f554bbd5 <<ValidationLogic>>
+participant "0xf63b..3ecf" as f63b3ecf <<Aave variable debt bearing WETH (variableDebtWETH)>><<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0xddde..8d79" as ddde8d79 <<Aave variable debt bearing WETH (variableDebtWETH)>><<VariableDebtToken>>
+participant "0x4e97..7121" as 4e977121 <<Aave stable debt bearing WETH (stableDebtWETH)>><<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0xa558..9b92" as a5589b92 <<Aave stable debt bearing WETH (stableDebtWETH)>><<StableDebtToken>>
+participant "0x030b..854e" as 030b854e <<Aave interest bearing WETH (aWETH)>><<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0x541d..01f4" as 541d01f4 <<Aave interest bearing WETH (aWETH)>><<AToken>>
+participant "0xd784..f6b5" as d784f6b5 <<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0xd9ed..ce31" as d9edce31 <<StakedTokenIncentivesController>>
+participant "0xec36..cd5f" as ec36cd5f <<DefaultReserveInterestRateStrategy>>
+participant "0xb53c..c8c5" as b53cc8c5 <<LendingPoolAddressesProvider>>
+participant "0x8a32..5c7d" as 8a325c7d <<LendingRateOracle>>
+participant "0xa50b..9ca9" as a50b9ca9 <<AaveOracle>>
+participant "0x7736..f1f4" as 7736f1f4 <<EACAggregatorProxy>>
+participant "0x1582..33fc" as 158233fc <<AccessControlledOffchainAggregator>>
+participant "0x6c3c..379d" as 6c3c379d <<Aave variable debt bearing DAI (variableDebtDAI)>><<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0x3f87..3e08" as 3f873e08 <<Aave variable debt bearing DAI (variableDebtDAI)>><<VariableDebtToken>>
+participant "0x778a..8e92" as 778a8e92 <<Aave stable debt bearing DAI (stableDebtDAI)>><<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0xd23a..9f7c" as d23a9f7c <<Aave stable debt bearing DAI (stableDebtDAI)>><<StableDebtToken>>
+participant "0x0281..68a3" as 028168a3 <<Aave interest bearing DAI (aDAI)>><<InitializableImmutableAdminUpgradeabilityProxy>>
+participant "0x7b2a..7bd0" as 7b2a7bd0 <<Aave interest bearing DAI (aDAI)>><<AToken>>
+participant "0xfffe..b62a" as fffeb62a <<DefaultReserveInterestRateStrategy>>
+participant "0xe2f2..35a5" as e2f235a5 <<mStable USD (mUSD)>><<MassetProxy>>
+participant "0x15b2..5aee" as 15b25aee <<MusdV3>>
+participant "0x1e91..8848" as 1e918848 <<Manager>>
+participant "0xa2a3..9d6e" as a2a39d6e <<PAaveIntegration>>
+participant "0xca48..d705" as ca48d705 <<InvariantValidator>>
+participant "0xd556..b735" as d556b735 <<VaultProxy>>
+participant "0xeb2b..879e" as eb2b879e <<CompoundIntegration>>
+participant "0x39aa..7563" as 39aa7563 <<Compound USD Coin (cUSDC)>><<CErc20>>
+participant "0xd8ec..53c0" as d8ec53c0 <<LegacyJumpRateModelV2>>
+participant "0x3d98..cd3b" as 3d98cd3b <<Unitroller>>
+participant "0xbafe..b526" as bafeb526 <<Comptroller>>
+participant "0x89b7..cc5a" as 89b7cc5a <<DssPsm>>
+participant "0x0a59..2199" as 0a592199 <<AuthGemJoin5>>
+participant "0x35d1..492b" as 35d1492b <<Vat>>
+participant "0x9759..1a28" as 97591a28 <<DaiJoin>>
+participant "0xe592..1564" as e5921564 <<SwapRouter>>
+participant "0x6059..a270" as 6059a270 
+participant "0xeae7..b790" as eae7b790 <<GenericLogic>>
+
+note over a3f69c5f
+Nonce: 342
+Gas Price: 38.77835178 Gwei
+Gas Limit: 3,500,000
+Gas Used: 1,315,230
+Tx Fee: 0.051 ETH
+end note
+
+a3f69c5f -> 7976792f: 0x9b578d71\n1,416,110 gas\n95 ETH
+activate 7976792f
+7976792f --> a0b8eb48: balanceOf(\naccount: 0xC2Cd..b651)\n9,815 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0xC2Cd..b651)\n2,529 gas
+activate a232bdcf #809ECB
+return\n0
+return\n0
+note right of a0b8eb48: \n7,286 gas
+7976792f -> 6b171d0f: balanceOf(\n0xA2a3..9d6E)\n2,602 gas
+activate 6b171d0f
+return\n983,105,,302,001,698,193,865,553
+7976792f -> 57ab5f51: balanceOf(\nowner: 0xA2a3..9d6E)\n13,455 gas
+activate 57ab5f51
+57ab5f51 -> 10a5275f: balanceOf(\naccount: 0xA2a3..9d6E)\n7,931 gas
+activate 10a5275f
+10a5275f -> 05a943e8: balanceOf(\n0xA2a3..9d6E)\n2,497 gas
+activate 05a943e8
+return\n1,093,251,,294,955,246,000,858,285
+return\n1,093,251,,294,955,246,000,858,285
+note right of 10a5275f: \n5,434 gas
+return\n1,093,251,,294,955,246,000,858,285
+note right of 57ab5f51: \n5,524 gas
+7976792f -> dac11ec7: balanceOf(\nwho: 0xA2a3..9d6E)\n5,031 gas
+activate dac11ec7
+return\n643,942,875,241
+7976792f -> c02a6cc2: deposit()\n23,974 gas\n95 ETH
+activate c02a6cc2
+return
+7976792f -> c02a6cc2: balanceOf(\n0xBA12..F2C8)\n2,534 gas
+activate c02a6cc2
+return\n89,064,,046,218,805,695,728,115
+7976792f -> ba12f2c8: flashLoan(\nrecipient: 0x7976..792f,\ntokens: [\n  0: 0xC02a..6Cc2],\namounts: [\n  0: 89,064,,046,218,805,695,728,115],\nuserData: 0x0..0a0b86991c6218b36c1d19d4a2e9eb0ce3606eb480..081b3b10843eb25d0\n..0)\n1,327,747 gas
+activate ba12f2c8
+ba12f2c8 -> c02a6cc2: balanceOf(\n0xBA12..F2C8)\n534 gas
+activate c02a6cc2
+return\n89,064,,046,218,805,695,728,115
+ba12f2c8 -> ce889f9f: getFlashLoanFeePercentage()\n2,350 gas
+activate ce889f9f
+return\n0
+ba12f2c8 -> c02a6cc2: transfer(\ndst: 0x7976..792f,\nwad: 89,064,,046,218,805,695,728,115)\n6,062 gas
+activate c02a6cc2
+return\ntrue
+ba12f2c8 -> 7976792f: 0xf04f2707\n1,300,110 gas
+activate 7976792f
+7976792f -> c02a6cc2: allowance(\n0x7976..792f,\n0x7d27..c7A9)\n2,717 gas
+activate c02a6cc2
+return\n57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,281,235,452,,542,881,799,744,159,974
+7976792f --> 7d27c7a9: deposit(\nasset: 0xC02a..6Cc2,\namount: 89,064,,046,218,805,695,728,115,\nonBehalfOf: 0x7976..792f,\nreferralCode: )\n218,789 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: deposit(\nasset: 0xC02a..6Cc2,\namount: 89,064,,046,218,805,695,728,115,\nonBehalfOf: 0x7976..792f,\nreferralCode: )\n213,666 gas
+activate c6845baf #809ECB
+7d27c7a9 -[#3471CD]>> f554bbd5: 0x0eca322b\n2,720 gas
+activate f554bbd5 #809ECB
+return
+7d27c7a9 --[#3471CD]> f63b3ecf: scaledTotalSupply()\n7,463 gas
+activate f63b3ecf
+f63b3ecf ->> ddde8d79: scaledTotalSupply()\n2,355 gas
+activate ddde8d79 #809ECB
+return\n366,157,,443,657,903,867,902,487
+return\n366,157,,443,657,903,867,902,487
+note right of f63b3ecf: \n5,108 gas
+7d27c7a9 --[#3471CD]> 4e977121: getSupplyData()\n14,309 gas
+activate 4e977121
+4e977121 ->> a5589b92: getSupplyData()\n9,189 gas
+activate a5589b92 #809ECB
+return\n322,,111,363,769,334,437,899,\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328,\n1,657,705,779
+return\n322,,111,363,769,334,437,899,\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328,\n1,657,705,779
+note right of 4e977121: \n5,120 gas
+7d27c7a9 --[#3471CD]> 030b854e: mintToTreasury(\namount: 40,161,004,778,624,723,\nindex: 1,009,597,511,,155,776,128,044,117,666)\n38,569 gas
+activate 030b854e
+030b854e ->> 541d01f4: mintToTreasury(\namount: 40,161,004,778,624,723,\nindex: 1,009,597,511,,155,776,128,044,117,666)\n33,458 gas
+activate 541d01f4 #809ECB
+030b854e --[#3471CD]> d784f6b5: handleAction(\nuser: 0x464C..e18c,\ntotalSupply: 796,758,,386,205,322,146,622,786,\nuserBalance: 271,,703,992,559,713,821,260)\n15,654 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0x464C..e18c,\ntotalSupply: 796,758,,386,205,322,146,622,786,\nuserBalance: 271,,703,992,559,713,821,260)\n10,537 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n5,117 gas
+return
+note right of 541d01f4: \n17,804 gas
+return
+note right of 030b854e: \n5,111 gas
+7d27c7a9 --[#3471CD]> 4e977121: getTotalSupplyAndAvgRate()\n3,535 gas
+activate 4e977121
+4e977121 ->> a5589b92: getTotalSupplyAndAvgRate()\n2,924 gas
+activate a5589b92 #809ECB
+return\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328
+return\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328
+note right of 4e977121: \n611 gas
+7d27c7a9 --[#3471CD]> f63b3ecf: scaledTotalSupply()\n963 gas
+activate f63b3ecf
+f63b3ecf ->> ddde8d79: scaledTotalSupply()\n355 gas
+activate ddde8d79 #809ECB
+return\n366,157,,443,657,903,867,902,487
+return\n366,157,,443,657,903,867,902,487
+note right of f63b3ecf: \n608 gas
+7d27c7a9 -[#3471CD]> c02a6cc2: balanceOf(\n0x030b..854e)\n2,534 gas
+activate c02a6cc2
+return\n431,894,,750,349,552,158,328,948
+7d27c7a9 -[#3471CD]> ec36cd5f: calculateInterestRates(\nreserve: 0xC02a..6Cc2,\navailableLiquidity: 520,958,,796,568,357,854,057,063,\ntotalStableDebt: 322,,179,121,508,932,387,374,\ntotalVariableDebt: 372,188,,395,003,549,610,857,965,\naverageStableBorrowRate: 48,193,805,,371,199,174,074,898,328,\nreserveFactor: 1,000)\n15,675 gas
+activate ec36cd5f
+ec36cd5f -> b53cc8c5: getLendingRateOracle()\n2,559 gas
+activate b53cc8c5
+return\n0x8A32..5c7D
+ec36cd5f -> 8a325c7d: getMarketBorrowRate(\nasset: 0xC02a..6Cc2)\n2,486 gas
+activate 8a325c7d
+return\n30,000,000,,000,000,000,000,000,000
+return\n6,714,607,,230,668,197,025,326,538,\n53,824,340,,508,630,674,595,231,123,\n17,868,255,,381,473,005,946,423,341
+note right of ec36cd5f: \n10,630 gas
+7d27c7a9 -[#3471CD]> c02a6cc2: transferFrom(\nsrc: 0x7976..792f,\ndst: 0x030b..854e,\nwad: 89,064,,046,218,805,695,728,115)\n9,748 gas
+activate c02a6cc2
+return\ntrue
+7d27c7a9 --[#3471CD]> 030b854e: mint(\nuser: 0x7976..792f,\namount: 89,064,,046,218,805,695,728,115,\nindex: 1,009,597,511,,155,776,128,044,117,666)\n32,353 gas
+activate 030b854e
+030b854e ->> 541d01f4: mint(\nuser: 0x7976..792f,\namount: 89,064,,046,218,805,695,728,115,\nindex: 1,009,597,511,,155,776,128,044,117,666)\n31,733 gas
+activate 541d01f4 #809ECB
+030b854e --[#3471CD]> d784f6b5: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 796,758,,425,984,545,386,435,299,\nuserBalance: 0)\n3,771 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 796,758,,425,984,545,386,435,299,\nuserBalance: 0)\n3,154 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n617 gas
+return\ntrue
+note right of 541d01f4: \n27,962 gas
+return\ntrue
+note right of 030b854e: \n620 gas
+return
+note right of c6845baf: \n85,797 gas
+return
+note right of 7d27c7a9: \n5,123 gas
+7976792f --> 7d27c7a9: borrow(\nasset: 0x6B17..1d0F,\namount: 9,800,000,,000,000,000,000,000,000,\ninterestRateMode: 2,\nreferralCode: ,\nonBehalfOf: 0x7976..792f)\n239,107 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: borrow(\nasset: 0x6B17..1d0F,\namount: 9,800,000,,000,000,000,000,000,000,\ninterestRateMode: 2,\nreferralCode: ,\nonBehalfOf: 0x7976..792f)\n238,478 gas
+activate c6845baf #809ECB
+7d27c7a9 -[#3471CD]> b53cc8c5: getPriceOracle()\n2,579 gas
+activate b53cc8c5
+return\n0xA50b..9Ca9
+7d27c7a9 -[#3471CD]> a50b9ca9: getAssetPrice(\nasset: 0x6B17..1d0F)\n20,132 gas
+activate a50b9ca9
+a50b9ca9 -> 7736f1f4: latestAnswer()\n14,592 gas
+activate 7736f1f4
+7736f1f4 -> 158233fc: latestAnswer()\n7,096 gas
+activate 158233fc
+return\n841,975,513,212,467
+return\n841,975,513,212,467
+note right of 7736f1f4: \n7,496 gas
+return\n841,975,513,212,467
+note right of a50b9ca9: \n5,540 gas
+7d27c7a9 -[#3471CD]>> f554bbd5: 0x721a92f9\n25,004 gas
+activate f554bbd5 #809ECB
+7d27c7a9 -[#3471CD]> a50b9ca9: getAssetPrice(\nasset: 0xC02a..6Cc2)\n2,590 gas
+activate a50b9ca9
+return\n1,,000,000,000,000,000,000
+7d27c7a9 --[#3471CD]> 030b854e: balanceOf(\naccount: 0x7976..792f)\n3,339 gas
+activate 030b854e
+030b854e ->> 541d01f4: balanceOf(\nuser: 0x7976..792f)\n2,728 gas
+activate 541d01f4 #809ECB
+030b854e --[#3471CD]> 7d27c7a9: getReserveNormalizedIncome(\nasset: 0xC02a..6Cc2)\n1,482 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: getReserveNormalizedIncome(\nasset: 0xC02a..6Cc2)\n871 gas
+activate c6845baf #809ECB
+7d27c7a9 --[#3471CD]> 6c3c379d: scaledTotalSupply()\n7,463 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: scaledTotalSupply()\n2,355 gas
+activate 3f873e08 #809ECB
+return\n100,567,024,,773,666,784,272,920,783
+return\n100,567,024,,773,666,784,272,920,783
+note right of 6c3c379d: \n5,108 gas
+7d27c7a9 --[#3471CD]> 778a8e92: getSupplyData()\n14,309 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: getSupplyData()\n9,189 gas
+activate d23a9f7c #809ECB
+return\n1,965,532,,774,470,211,879,031,891,\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949,\n1,657,797,298
+return\n1,965,532,,774,470,211,879,031,891,\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949,\n1,657,797,298
+note right of 778a8e92: \n5,120 gas
+7d27c7a9 --[#3471CD]> 028168a3: mintToTreasury(\namount: 19,,044,551,812,628,007,784,\nindex: 1,074,250,075,,310,718,346,570,481,280)\n29,569 gas
+activate 028168a3
+028168a3 ->> 7b2a7bd0: mintToTreasury(\namount: 19,,044,551,812,628,007,784,\nindex: 1,074,250,075,,310,718,346,570,481,280)\n24,458 gas
+activate 7b2a7bd0 #809ECB
+028168a3 --[#3471CD]> d784f6b5: handleAction(\nuser: 0x464C..e18c,\ntotalSupply: 311,732,968,,730,744,083,049,623,461,\nuserBalance: 4,772,207,,931,174,601,404,901,799)\n9,154 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0x464C..e18c,\ntotalSupply: 311,732,968,,730,744,083,049,623,461,\nuserBalance: 4,772,207,,931,174,601,404,901,799)\n8,537 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n617 gas
+return
+note right of 7b2a7bd0: \n15,304 gas
+return
+note right of 028168a3: \n5,111 gas
+7d27c7a9 --[#3471CD]> 6c3c379d: mint(\nuser: 0x7976..792f,\nonBehalfOf: 0x7976..792f,\namount: 9,800,000,,000,000,000,000,000,000,\nindex: 1,117,503,516,,916,264,619,791,192,124)\n40,987 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: mint(\nuser: 0x7976..792f,\nonBehalfOf: 0x7976..792f,\namount: 9,800,000,,000,000,000,000,000,000,\nindex: 1,117,503,516,,916,264,619,791,192,124)\n40,361 gas
+activate 3f873e08 #809ECB
+6c3c379d --[#3471CD]> d784f6b5: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 100,567,024,,773,666,784,272,920,783,\nuserBalance: 0)\n9,154 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 100,567,024,,773,666,784,272,920,783,\nuserBalance: 0)\n8,537 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n617 gas
+return\ntrue
+note right of 3f873e08: \n31,207 gas
+return\ntrue
+note right of 6c3c379d: \n626 gas
+7d27c7a9 --[#3471CD]> 778a8e92: getTotalSupplyAndAvgRate()\n3,535 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: getTotalSupplyAndAvgRate()\n2,924 gas
+activate d23a9f7c #809ECB
+return\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949
+return\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949
+note right of 778a8e92: \n611 gas
+7d27c7a9 --[#3471CD]> 6c3c379d: scaledTotalSupply()\n963 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: scaledTotalSupply()\n355 gas
+activate 3f873e08 #809ECB
+return\n109,336,572,,118,844,688,872,936,117
+return\n109,336,572,,118,844,688,872,936,117
+note right of 6c3c379d: \n608 gas
+7d27c7a9 -[#3471CD]> 6b171d0f: balanceOf(\n0x0281..68A3)\n2,602 gas
+activate 6b171d0f
+return\n220,529,500,,818,931,963,028,476,971
+7d27c7a9 -[#3471CD]> fffeb62a: calculateInterestRates(\nreserve: 0x6B17..1d0F,\navailableLiquidity: 210,729,500,,818,931,963,028,476,971,\ntotalStableDebt: 1,965,780,,640,650,718,933,681,611,\ntotalVariableDebt: 122,184,003,,870,377,742,355,177,674,\naverageStableBorrowRate: 86,234,969,,634,568,806,876,441,949,\nreserveFactor: 1,000)\n8,675 gas
+activate fffeb62a
+fffeb62a -> b53cc8c5: getLendingRateOracle()\n559 gas
+activate b53cc8c5
+return\n0x8A32..5c7D
+fffeb62a -> 8a325c7d: getMarketBorrowRate(\nasset: 0x6B17..1d0F)\n2,486 gas
+activate 8a325c7d
+return\n100,000,000,,000,000,000,000,000,000
+return\n6,542,489,,855,209,331,019,539,462,\n109,268,249,,034,028,952,099,185,673,\n18,536,498,,068,057,904,198,371,346
+note right of fffeb62a: \n5,630 gas
+7d27c7a9 --[#3471CD]> 028168a3: transferUnderlyingTo(\ntarget: 0x7976..792f,\namount: 9,800,000,,000,000,000,000,000,000)\n13,476 gas
+activate 028168a3
+028168a3 ->> 7b2a7bd0: transferUnderlyingTo(\ntarget: 0x7976..792f,\namount: 9,800,000,,000,000,000,000,000,000)\n12,862 gas
+activate 7b2a7bd0 #809ECB
+028168a3 -[#3471CD]> 6b171d0f: transfer(\ndst: 0x7976..792f,\nwad: 9,800,000,,000,000,000,000,000,000)\n11,074 gas
+activate 6b171d0f
+return\ntrue
+return\n9,800,000,,000,000,000,000,000,000
+note right of 7b2a7bd0: \n1,788 gas
+return\n9,800,000,,000,000,000,000,000,000
+note right of 028168a3: \n614 gas
+return\n1,009,597,511,,155,776,128,044,117,666
+return\n1,009,597,511,,155,776,128,044,117,666
+note right of 7d27c7a9: \n611 gas
+return\n89,064,,046,218,805,695,728,115
+note right of 541d01f4: \n1,246 gas
+return\n89,064,,046,218,805,695,728,115
+note right of 030b854e: \n611 gas
+return
+note right of f554bbd5: \n19,075 gas
+return
+note right of c6845baf: \n69,184 gas
+return
+note right of 7d27c7a9: \n629 gas
+7976792f -> 6b171d0f: allowance(\n0x7976..792f,\n0xe2f2..35a5)\n2,677 gas
+activate 6b171d0f
+return\n57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,249,769,728,,026,617,270,978,922,006
+7976792f -> 6b171d0f: balanceOf(\n0x7976..792f)\n602 gas
+activate 6b171d0f
+return\n9,800,000,,192,571,004,713,351,804
+7976792f --> e2f235a5: swap(\n_input: 0x6B17..1d0F,\n_output: 0xA0b8..eB48,\n_inputQuantity: 9,800,000,,192,571,004,713,351,804,\n_minOutputQuantity: 0,\n_recipient: 0x7976..792f)\n396,271 gas
+activate e2f235a5
+e2f235a5 ->> 15b25aee: swap(\n_input: 0x6B17..1d0F,\n_output: 0xA0b8..eB48,\n_inputQuantity: 9,800,000,,192,571,004,713,351,804,\n_minOutputQuantity: 0,\n_recipient: 0x7976..792f)\n389,007 gas
+activate 15b25aee #809ECB
+e2f235a5 -[#3471CD]>> 1e918848: 0x4e3d3913\n93,784 gas
+activate 1e918848 #809ECB
+e2f235a5 -[#3471CD]> 6b171d0f: balanceOf(\n0xA2a3..9d6E)\n602 gas
+activate 6b171d0f
+return\n983,105,,302,001,698,193,865,553
+e2f235a5 -[#3471CD]> 6b171d0f: transferFrom(\nsrc: 0x7976..792f,\ndst: 0xA2a3..9d6E,\nwad: 9,800,000,,192,571,004,713,351,804)\n10,375 gas
+activate 6b171d0f
+return\ntrue
+e2f235a5 -[#3471CD]> 6b171d0f: balanceOf(\n0xA2a3..9d6E)\n602 gas
+activate 6b171d0f
+return\n10,783,105,,494,572,702,907,217,357
+e2f235a5 -[#3471CD]> a2a39d6e: deposit(\n_bAsset: 0x6B17..1d0F,\n_amount: 10,086,617,,575,934,659,408,267,298,\n_hasTxFee: false)\n74,664 gas
+activate a2a39d6e
+a2a39d6e -> b53cc8c5: getLendingPool()\n2,471 gas
+activate b53cc8c5
+return\n0x7d27..c7A9
+a2a39d6e --> 7d27c7a9: deposit(\nasset: 0x6B17..1d0F,\namount: 10,086,617,,575,934,659,408,267,298,\nonBehalfOf: 0xA2a3..9d6E,\nreferralCode: 36)\n61,380 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: deposit(\nasset: 0x6B17..1d0F,\namount: 10,086,617,,575,934,659,408,267,298,\nonBehalfOf: 0xA2a3..9d6E,\nreferralCode: 36)\n60,757 gas
+activate c6845baf #809ECB
+7d27c7a9 -[#3471CD]>> f554bbd5: 0x0eca322b\n720 gas
+activate f554bbd5 #809ECB
+return
+7d27c7a9 --[#3471CD]> 6c3c379d: scaledTotalSupply()\n963 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: scaledTotalSupply()\n355 gas
+activate 3f873e08 #809ECB
+return\n109,336,572,,118,844,688,872,936,117
+return\n109,336,572,,118,844,688,872,936,117
+note right of 6c3c379d: \n608 gas
+7d27c7a9 --[#3471CD]> 778a8e92: getSupplyData()\n3,809 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: getSupplyData()\n3,189 gas
+activate d23a9f7c #809ECB
+return\n1,965,532,,774,470,211,879,031,891,\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949,\n1,657,797,298
+return\n1,965,532,,774,470,211,879,031,891,\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949,\n1,657,797,298
+note right of 778a8e92: \n620 gas
+7d27c7a9 --[#3471CD]> 778a8e92: getTotalSupplyAndAvgRate()\n3,535 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: getTotalSupplyAndAvgRate()\n2,924 gas
+activate d23a9f7c #809ECB
+return\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949
+return\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949
+note right of 778a8e92: \n611 gas
+7d27c7a9 --[#3471CD]> 6c3c379d: scaledTotalSupply()\n963 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: scaledTotalSupply()\n355 gas
+activate 3f873e08 #809ECB
+return\n109,336,572,,118,844,688,872,936,117
+return\n109,336,572,,118,844,688,872,936,117
+note right of 6c3c379d: \n608 gas
+7d27c7a9 -[#3471CD]> 6b171d0f: balanceOf(\n0x0281..68A3)\n602 gas
+activate 6b171d0f
+return\n210,729,500,,818,931,963,028,476,971
+7d27c7a9 -[#3471CD]> fffeb62a: calculateInterestRates(\nreserve: 0x6B17..1d0F,\navailableLiquidity: 220,816,118,,394,866,622,436,744,269,\ntotalStableDebt: 1,965,780,,640,650,718,933,681,611,\ntotalVariableDebt: 122,184,003,,870,377,742,355,177,674,\naverageStableBorrowRate: 86,234,969,,634,568,806,876,441,949,\nreserveFactor: 1,000)\n6,675 gas
+activate fffeb62a
+fffeb62a -> b53cc8c5: getLendingRateOracle()\n559 gas
+activate b53cc8c5
+return\n0x8A32..5c7D
+fffeb62a -> 8a325c7d: getMarketBorrowRate(\nasset: 0x6B17..1d0F)\n486 gas
+activate 8a325c7d
+return\n100,000,000,,000,000,000,000,000,000
+return\n6,178,417,,215,942,977,279,775,417,\n108,997,250,,414,115,267,006,958,592,\n17,994,500,,828,230,534,013,917,185
+note right of fffeb62a: \n5,630 gas
+7d27c7a9 -[#3471CD]> 6b171d0f: transferFrom(\nsrc: 0xA2a3..9d6E,\ndst: 0x0281..68A3,\nwad: 10,086,617,,575,934,659,408,267,298)\n5,818 gas
+activate 6b171d0f
+return\ntrue
+7d27c7a9 --[#3471CD]> 028168a3: mint(\nuser: 0xA2a3..9d6E,\namount: 10,086,617,,575,934,659,408,267,298,\nindex: 1,074,250,075,,310,718,346,570,481,280)\n15,253 gas
+activate 028168a3
+028168a3 ->> 7b2a7bd0: mint(\nuser: 0xA2a3..9d6E,\namount: 10,086,617,,575,934,659,408,267,298,\nindex: 1,074,250,075,,310,718,346,570,481,280)\n14,633 gas
+activate 7b2a7bd0 #809ECB
+028168a3 --[#3471CD]> d784f6b5: handleAction(\nuser: 0xA2a3..9d6E,\ntotalSupply: 311,732,986,,458,973,524,522,570,665,\nuserBalance: 10,854,545,,869,091,122,656,731,890)\n3,771 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0xA2a3..9d6E,\ntotalSupply: 311,732,986,,458,973,524,522,570,665,\nuserBalance: 10,854,545,,869,091,122,656,731,890)\n3,154 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n617 gas
+return\nfalse
+note right of 7b2a7bd0: \n10,862 gas
+return\nfalse
+note right of 028168a3: \n620 gas
+return
+note right of c6845baf: \n22,419 gas
+return
+note right of 7d27c7a9: \n623 gas
+return\nquantityDeposited: 10,086,617,,575,934,659,408,267,298
+note right of a2a39d6e: \n10,813 gas
+return
+note right of 1e918848: \n7,541 gas
+e2f235a5 -[#3471CD]> ca48d705: computeSwap(\n_bAssets: [\n  0: [\n    ratio: 100,000,000,\n    vaultBalance: 5,072,094,,982,648,438,258,433,381],\n  1: [\n    ratio: 100,,000,000,000,000,000,000,\n    vaultBalance: 13,035,556,618,708],\n  2: [\n    ratio: 100,000,000,\n    vaultBalance: 12,643,594,,239,544,309,154,916,400],\n  3: [\n    ratio: 100,,000,000,000,000,000,000,\n    vaultBalance: 15,709,343,057,103]],\n_i: 2,\n_o: 1,\n_rawInput: 9,800,000,,192,571,004,713,351,804,\n_feeRate: 200,000,000,000,000,\n_config: [\n  a: 25,000,\n  limits: [\n    min: 50,000,000,000,000,000,\n    max: 500,000,000,000,000,000]])\n39,080 gas
+activate ca48d705
+return\nbAssetOutputQuantity: 9,719,938,773,954,\nscaledSwapFee: 1,955,,982,953,648,568,272,834
+e2f235a5 -[#3471CD]>> 1e918848: 0x4e331a54\n182,599 gas
+activate 1e918848 #809ECB
+e2f235a5 --[#3471CD]> a0b8eb48: balanceOf(\naccount: 0xD556..B735)\n3,315 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0xD556..B735)\n2,529 gas
+activate a232bdcf #809ECB
+return\n862,659,820,259
+return\n862,659,820,259
+note right of a0b8eb48: \n786 gas
+e2f235a5 --[#3471CD]> d556b735: withdraw(\n_receiver: 0x7976..792f,\n_bAsset: 0xA0b8..eB48,\n_amount: 9,719,938,773,954,\n_totalAmount: 9,553,766,872,333,\n_hasTxFee: false)\n173,548 gas
+activate d556b735
+d556b735 ->> eb2b879e: withdraw(\n_receiver: 0x7976..792f,\n_bAsset: 0xA0b8..eB48,\n_amount: 9,719,938,773,954,\n_totalAmount: 9,553,766,872,333,\n_hasTxFee: false)\n166,287 gas
+activate eb2b879e #809ECB
+d556b735 -[#3471CD]> 39aa7563: exchangeRateStored()\n13,832 gas
+activate 39aa7563
+39aa7563 --> a0b8eb48: balanceOf(\naccount: 0x39AA..7563)\n3,315 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0x39AA..7563)\n2,529 gas
+activate a232bdcf #809ECB
+return\n660,027,472,048,634
+return\n660,027,472,048,634
+note right of a0b8eb48: \n786 gas
+return\n226,214,896,985,415
+note right of 39aa7563: \n10,517 gas
+d556b735 -[#3471CD]> 39aa7563: redeemUnderlying(\nredeemAmount: 9,553,766,872,333)\n123,508 gas
+activate 39aa7563
+39aa7563 --> a0b8eb48: balanceOf(\naccount: 0x39AA..7563)\n1,315 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0x39AA..7563)\n529 gas
+activate a232bdcf #809ECB
+return\n660,027,472,048,634
+return\n660,027,472,048,634
+note right of a0b8eb48: \n786 gas
+39aa7563 -> d8ec53c0: getBorrowRate(\ncash: 660,027,472,048,634,\nborrows: 281,878,603,822,477,\nreserves: 13,287,524,283,564)\n7,853 gas
+activate d8ec53c0
+return\n0,\n7,219,039,407
+39aa7563 --> a0b8eb48: balanceOf(\naccount: 0x39AA..7563)\n1,315 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0x39AA..7563)\n529 gas
+activate a232bdcf #809ECB
+return\n660,027,472,048,634
+return\n660,027,472,048,634
+note right of a0b8eb48: \n786 gas
+39aa7563 --> 3d98cd3b: redeemAllowed(\ncToken: 0x39AA..7563,\nredeemer: 0xD556..B735,\nredeemTokens: 42,233,145,331,725,066)\n37,137 gas
+activate 3d98cd3b
+3d98cd3b ->> bafeb526: redeemAllowed(\ncToken: 0x39AA..7563,\nredeemer: 0xD556..B735,\nredeemTokens: 42,233,145,331,725,066)\n31,947 gas
+activate bafeb526 #809ECB
+3d98cd3b -[#3471CD]> 39aa7563: totalSupply()\n344 gas
+activate 39aa7563
+return\n4,,105,028,289,305,877,059
+3d98cd3b -[#3471CD]> 39aa7563: balanceOf(\nowner: 0xD556..B735)\n2,553 gas
+activate 39aa7563
+39aa7563 --> a0b8eb48: balanceOf(\naccount: 0x39AA..7563)\n1,315 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0x39AA..7563)\n529 gas
+activate a232bdcf #809ECB
+return\n660,027,472,048,634
+return\n660,027,472,048,634
+note right of a0b8eb48: \n786 gas
+39aa7563 --> a0b8eb48: transfer(\nto: 0xD556..B735,\nvalue: 9,553,766,872,333)\n16,417 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: transfer(\nto: 0xD556..B735,\nvalue: 9,553,766,872,333)\n15,628 gas
+activate a232bdcf #809ECB
+return\ntrue
+return\ntrue
+note right of a0b8eb48: \n789 gas
+39aa7563 --> 3d98cd3b: redeemVerify(\ncToken: 0x39AA..7563,\nredeemer: 0xD556..B735,\nredeemAmount: 9,553,766,872,333,\nredeemTokens: 42,233,145,331,725,066)\n993 gas
+activate 3d98cd3b
+3d98cd3b ->> bafeb526: redeemVerify(\ncToken: 0x39AA..7563,\nredeemer: 0xD556..B735,\nredeemAmount: 9,553,766,872,333,\nredeemTokens: 42,233,145,331,725,066)\n380 gas
+activate bafeb526 #809ECB
+return
+return
+note right of 3d98cd3b: \n613 gas
+return\n53,811,251,162,806,453
+return\n0
+note right of bafeb526: \n29,050 gas
+return\n0
+note right of 3d98cd3b: \n5,190 gas
+return\n0
+note right of 39aa7563: \n57,163 gas
+d556b735 --[#3471CD]> a0b8eb48: transfer(\nto: 0x7976..792f,\nvalue: 9,719,938,773,954)\n11,617 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: transfer(\nto: 0x7976..792f,\nvalue: 9,719,938,773,954)\n10,828 gas
+activate a232bdcf #809ECB
+return\ntrue
+return\ntrue
+note right of a0b8eb48: \n789 gas
+return
+note right of eb2b879e: \n17,330 gas
+return
+note right of d556b735: \n7,261 gas
+return
+note right of 1e918848: \n5,736 gas
+return\nswapOutput: 9,719,938,773,954
+note right of 15b25aee: \n73,544 gas
+return\nswapOutput: 9,719,938,773,954
+note right of e2f235a5: \n7,264 gas
+7976792f --> a0b8eb48: balanceOf(\naccount: 0x7976..792f)\n1,315 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: balanceOf(\naccount: 0x7976..792f)\n529 gas
+activate a232bdcf #809ECB
+return\n9,719,938,773,955
+return\n9,719,938,773,955
+note right of a0b8eb48: \n786 gas
+7976792f --> a0b8eb48: allowance(\nowner: 0x7976..792f,\nspender: 0x0A59..2199)\n3,426 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: allowance(\nowner: 0x7976..792f,\nspender: 0x0A59..2199)\n2,637 gas
+activate a232bdcf #809ECB
+return\n57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,282,019,728,,791,971,929,068,013,622
+return\n57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,282,019,728,,791,971,929,068,013,622
+note right of a0b8eb48: \n789 gas
+7976792f -> 89b7cc5a: sellGem(\nusr: 0x7976..792f,\ngemAmt: 9,719,938,773,955)\n188,100 gas
+activate 89b7cc5a
+89b7cc5a -> 0a592199: join(\nurn: 0x89B7..cC5A,\nwad: 9,719,938,773,955,\n_msgSender: 0x7976..792f)\n66,280 gas
+activate 0a592199
+0a592199 -> 35d1492b: slip(\nilk: 0x50534d2d555344432d410..0,\nusr: 0x89B7..cC5A,\nwad: 9,719,938,,773,955,000,000,000,000)\n29,484 gas
+activate 35d1492b
+return
+0a592199 --> a0b8eb48: transferFrom(\nfrom: 0x7976..792f,\nto: 0x0A59..2199,\nvalue: 9,719,938,773,955)\n15,592 gas
+activate a0b8eb48
+a0b8eb48 ->> a232bdcf: transferFrom(\nfrom: 0x7976..792f,\nto: 0x0A59..2199,\nvalue: 9,719,938,773,955)\n14,797 gas
+activate a232bdcf #809ECB
+return\ntrue
+return\ntrue
+note right of a0b8eb48: \n795 gas
+return
+note right of 0a592199: \n21,204 gas
+89b7cc5a -> 35d1492b: frob(\ni: 0x50534d2d555344432d410..0,\nu: 0x89B7..cC5A,\nv: 0x89B7..cC5A,\nw: 0x89B7..cC5A,\ndink: 9,719,938,,773,955,000,000,000,000,\ndart: 9,719,938,,773,955,000,000,000,000)\n67,557 gas
+activate 35d1492b
+return
+89b7cc5a -> 35d1492b: move(\nsrc: 0x89B7..cC5A,\ndst: 0xA950..4466,\nrad: 0)\n8,043 gas
+activate 35d1492b
+return
+89b7cc5a -> 97591a28: exit(\nusr: 0x7976..792f,\nwad: 9,719,938,,773,955,000,000,000,000)\n34,801 gas
+activate 97591a28
+97591a28 -> 35d1492b: move(\nsrc: 0x89B7..cC5A,\ndst: 0x9759..1A28,\nrad: 9,719,938,773,955,000,000,000,000,000,000,000,,000,000,000,000,000,000)\n12,843 gas
+activate 35d1492b
+return
+97591a28 -> 6b171d0f: mint(\nusr: 0x7976..792f,\nwad: 9,719,938,,773,955,000,000,000,000)\n9,945 gas
+activate 6b171d0f
+return
+return
+note right of 97591a28: \n12,013 gas
+return
+note right of 89b7cc5a: \n11,419 gas
+7976792f -> c02a6cc2: allowance(\n0x7976..792f,\n0xE592..1564)\n2,717 gas
+activate c02a6cc2
+return\n57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,282,019,503,,010,277,516,077,933,150
+7976792f -> e5921564: exactOutputSingle(\nparams: [\n  tokenIn: 0xC02a..6Cc2,\n  tokenOut: 0x6B17..1d0F,\n  fee: 500,\n  recipient: 0x7976..792f,\n  deadline: 1,657,843,512,\n  amountOut: 80,062,,000,000,000,000,000,000,\n  amountInMaximum: 57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,282,019,728,,792,003,956,564,819,968,\n  sqrtPriceLimitX96: 0])\n78,967 gas
+activate e5921564
+e5921564 -> 6059a270: 0x128acb08\n71,284 gas
+activate 6059a270
+6059a270 -> 6b171d0f: transfer(\ndst: 0x7976..792f,\nwad: 80,062,,000,000,000,000,000,000)\n8,274 gas
+activate 6b171d0f
+return\ntrue
+6059a270 -> c02a6cc2: balanceOf(\n0x6059..A270)\n2,534 gas
+activate c02a6cc2
+return\n2,042,,017,538,593,637,818,669
+6059a270 -> e5921564: uniswapV3SwapCallback(\namount0Delta: -80062000000000000000000,\namount1Delta: 67,,699,403,357,779,992,485,\n_data: 0x0..020..040..07976edf0bd9a763905b5e873aee49a1c762c792f0..02b6b17\n5474e89094c44da98b954eedeac495271d0f0001f4c02aaa39b223fe8d0a0e5c4f\n27ead9083c756cc20..0)\n18,926 gas
+activate e5921564
+e5921564 -> c02a6cc2: transferFrom(\nsrc: 0x7976..792f,\ndst: 0x6059..A270,\nwad: 67,,699,403,357,779,992,485)\n9,748 gas
+activate c02a6cc2
+return\ntrue
+return
+note right of e5921564: \n9,178 gas
+6059a270 -> c02a6cc2: balanceOf(\n0x6059..A270)\n534 gas
+activate c02a6cc2
+return\n2,109,,716,941,951,417,811,154
+return
+note right of 6059a270: \n41,016 gas
+return\namountIn: 67,,699,403,357,779,992,485
+note right of e5921564: \n7,683 gas
+7976792f -> 6b171d0f: allowance(\n0x7976..792f,\n0x7d27..c7A9)\n2,677 gas
+activate 6b171d0f
+return\n57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,249,769,728,,792,003,956,564,819,968
+7976792f --> 7d27c7a9: repay(\nasset: 0x6B17..1d0F,\namount: 9,800,000,,000,000,000,000,000,000,\nrateMode: 2,\nonBehalfOf: 0x7976..792f)\n67,970 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: repay(\nasset: 0x6B17..1d0F,\namount: 9,800,000,,000,000,000,000,000,000,\nrateMode: 2,\nonBehalfOf: 0x7976..792f)\n67,344 gas
+activate c6845baf #809ECB
+7d27c7a9 --[#3471CD]> 778a8e92: balanceOf(\naccount: 0x7976..792f)\n5,425 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: balanceOf(\naccount: 0x7976..792f)\n4,814 gas
+activate d23a9f7c #809ECB
+return\n0
+return\n0
+note right of 778a8e92: \n611 gas
+7d27c7a9 --[#3471CD]> 6c3c379d: balanceOf(\naccount: 0x7976..792f)\n3,434 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: balanceOf(\nuser: 0x7976..792f)\n2,823 gas
+activate 3f873e08 #809ECB
+6c3c379d --[#3471CD]> 7d27c7a9: getReserveNormalizedVariableDebt(\nasset: 0x6B17..1d0F)\n1,522 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: getReserveNormalizedVariableDebt(\nasset: 0x6B17..1d0F)\n911 gas
+activate c6845baf #809ECB
+7d27c7a9 -[#3471CD]>> f554bbd5: 0xfa0c2149\n1,153 gas
+activate f554bbd5 #809ECB
+return
+7d27c7a9 --[#3471CD]> 6c3c379d: scaledTotalSupply()\n963 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: scaledTotalSupply()\n355 gas
+activate 3f873e08 #809ECB
+return\n109,336,572,,118,844,688,872,936,117
+return\n109,336,572,,118,844,688,872,936,117
+note right of 6c3c379d: \n608 gas
+7d27c7a9 --[#3471CD]> 778a8e92: getSupplyData()\n3,809 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: getSupplyData()\n3,189 gas
+activate d23a9f7c #809ECB
+return\n1,965,532,,774,470,211,879,031,891,\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949,\n1,657,797,298
+return\n1,965,532,,774,470,211,879,031,891,\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949,\n1,657,797,298
+note right of 778a8e92: \n620 gas
+7d27c7a9 --[#3471CD]> 6c3c379d: burn(\nuser: 0x7976..792f,\namount: 9,800,000,,000,000,000,000,000,000,\nindex: 1,117,503,516,,916,264,619,791,192,124)\n8,377 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: burn(\nuser: 0x7976..792f,\namount: 9,800,000,,000,000,000,000,000,000,\nindex: 1,117,503,516,,916,264,619,791,192,124)\n7,760 gas
+activate 3f873e08 #809ECB
+6c3c379d --[#3471CD]> d784f6b5: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 109,336,572,,118,844,688,872,936,117,\nuserBalance: 8,769,547,,345,177,904,600,015,334)\n1,771 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 109,336,572,,118,844,688,872,936,117,\nuserBalance: 8,769,547,,345,177,904,600,015,334)\n1,154 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n617 gas
+return
+note right of 3f873e08: \n5,989 gas
+return
+note right of 6c3c379d: \n617 gas
+7d27c7a9 --[#3471CD]> 778a8e92: getTotalSupplyAndAvgRate()\n3,535 gas
+activate 778a8e92
+778a8e92 ->> d23a9f7c: getTotalSupplyAndAvgRate()\n2,924 gas
+activate d23a9f7c #809ECB
+return\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949
+return\n1,965,780,,640,650,718,933,681,611,\n86,234,969,,634,568,806,876,441,949
+note right of 778a8e92: \n611 gas
+7d27c7a9 --[#3471CD]> 6c3c379d: scaledTotalSupply()\n963 gas
+activate 6c3c379d
+6c3c379d ->> 3f873e08: scaledTotalSupply()\n355 gas
+activate 3f873e08 #809ECB
+return\n100,567,024,,773,666,784,272,920,783
+return\n100,567,024,,773,666,784,272,920,783
+note right of 6c3c379d: \n608 gas
+7d27c7a9 -[#3471CD]> 6b171d0f: balanceOf(\n0x0281..68A3)\n602 gas
+activate 6b171d0f
+return\n220,816,118,,394,866,622,436,744,269
+7d27c7a9 -[#3471CD]> fffeb62a: calculateInterestRates(\nreserve: 0x6B17..1d0F,\navailableLiquidity: 230,616,118,,394,866,622,436,744,269,\ntotalStableDebt: 1,965,780,,640,650,718,933,681,611,\ntotalVariableDebt: 112,384,003,,870,377,742,355,177,674,\naverageStableBorrowRate: 86,234,969,,634,568,806,876,441,949,\nreserveFactor: 1,000)\n6,675 gas
+activate fffeb62a
+fffeb62a -> b53cc8c5: getLendingRateOracle()\n559 gas
+activate b53cc8c5
+return\n0x8A32..5c7D
+fffeb62a -> 8a325c7d: getMarketBorrowRate(\nasset: 0x6B17..1d0F)\n486 gas
+activate 8a325c7d
+return\n100,000,000,,000,000,000,000,000,000
+return\n5,301,861,,682,444,124,988,826,565,\n108,287,035,,294,486,951,931,513,489,\n16,574,070,,588,973,903,863,026,979
+note right of fffeb62a: \n5,630 gas
+7d27c7a9 -[#3471CD]> 6b171d0f: transferFrom(\nsrc: 0x7976..792f,\ndst: 0x0281..68A3,\nwad: 9,800,000,,000,000,000,000,000,000)\n7,575 gas
+activate 6b171d0f
+return\ntrue
+return\n1,117,503,516,,916,264,619,791,192,124
+return\n1,117,503,516,,916,264,619,791,192,124
+note right of 7d27c7a9: \n611 gas
+return\n9,800,000,,000,000,000,000,000,000
+note right of 3f873e08: \n1,301 gas
+return\n9,800,000,,000,000,000,000,000,000
+note right of 6c3c379d: \n611 gas
+return\n9,800,000,,000,000,000,000,000,000
+note right of c6845baf: \n24,833 gas
+return\n9,800,000,,000,000,000,000,000,000
+note right of 7d27c7a9: \n626 gas
+7976792f --> 7d27c7a9: withdraw(\nasset: 0xC02a..6Cc2,\namount: 89,064,,046,218,805,695,728,115,\nto: 0x7976..792f)\n64,273 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: withdraw(\nasset: 0xC02a..6Cc2,\namount: 89,064,,046,218,805,695,728,115,\nto: 0x7976..792f)\n63,653 gas
+activate c6845baf #809ECB
+7d27c7a9 --[#3471CD]> 030b854e: balanceOf(\naccount: 0x7976..792f)\n3,339 gas
+activate 030b854e
+030b854e ->> 541d01f4: balanceOf(\nuser: 0x7976..792f)\n2,728 gas
+activate 541d01f4 #809ECB
+030b854e --[#3471CD]> 7d27c7a9: getReserveNormalizedIncome(\nasset: 0xC02a..6Cc2)\n1,482 gas
+activate 7d27c7a9
+7d27c7a9 ->> c6845baf: getReserveNormalizedIncome(\nasset: 0xC02a..6Cc2)\n871 gas
+activate c6845baf #809ECB
+7d27c7a9 -[#3471CD]> b53cc8c5: getPriceOracle()\n579 gas
+activate b53cc8c5
+return\n0xA50b..9Ca9
+7d27c7a9 -[#3471CD]>> f554bbd5: 0xd09db04a\n5,655 gas
+activate f554bbd5 #809ECB
+7d27c7a9 -[#3471CD]>> eae7b790: 0xe6170424\n1,021 gas
+activate eae7b790 #809ECB
+return
+return
+note right of f554bbd5: \n4,634 gas
+7d27c7a9 --[#3471CD]> f63b3ecf: scaledTotalSupply()\n963 gas
+activate f63b3ecf
+f63b3ecf ->> ddde8d79: scaledTotalSupply()\n355 gas
+activate ddde8d79 #809ECB
+return\n366,157,,443,657,903,867,902,487
+return\n366,157,,443,657,903,867,902,487
+note right of f63b3ecf: \n608 gas
+7d27c7a9 --[#3471CD]> 4e977121: getSupplyData()\n3,809 gas
+activate 4e977121
+4e977121 ->> a5589b92: getSupplyData()\n3,189 gas
+activate a5589b92 #809ECB
+return\n322,,111,363,769,334,437,899,\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328,\n1,657,705,779
+return\n322,,111,363,769,334,437,899,\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328,\n1,657,705,779
+note right of 4e977121: \n620 gas
+7d27c7a9 --[#3471CD]> 4e977121: getTotalSupplyAndAvgRate()\n3,535 gas
+activate 4e977121
+4e977121 ->> a5589b92: getTotalSupplyAndAvgRate()\n2,924 gas
+activate a5589b92 #809ECB
+return\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328
+return\n322,,179,121,508,932,387,374,\n48,193,805,,371,199,174,074,898,328
+note right of 4e977121: \n611 gas
+7d27c7a9 --[#3471CD]> f63b3ecf: scaledTotalSupply()\n963 gas
+activate f63b3ecf
+f63b3ecf ->> ddde8d79: scaledTotalSupply()\n355 gas
+activate ddde8d79 #809ECB
+return\n366,157,,443,657,903,867,902,487
+return\n366,157,,443,657,903,867,902,487
+note right of f63b3ecf: \n608 gas
+7d27c7a9 -[#3471CD]> c02a6cc2: balanceOf(\n0x030b..854e)\n534 gas
+activate c02a6cc2
+return\n520,958,,796,568,357,854,057,063
+7d27c7a9 -[#3471CD]> ec36cd5f: calculateInterestRates(\nreserve: 0xC02a..6Cc2,\navailableLiquidity: 431,894,,750,349,552,158,328,948,\ntotalStableDebt: 322,,179,121,508,932,387,374,\ntotalVariableDebt: 372,188,,395,003,549,610,857,965,\naverageStableBorrowRate: 48,193,805,,371,199,174,074,898,328,\nreserveFactor: 1,000)\n6,675 gas
+activate ec36cd5f
+ec36cd5f -> b53cc8c5: getLendingRateOracle()\n559 gas
+activate b53cc8c5
+return\n0x8A32..5c7D
+ec36cd5f -> 8a325c7d: getMarketBorrowRate(\nasset: 0xC02a..6Cc2)\n486 gas
+activate 8a325c7d
+return\n30,000,000,,000,000,000,000,000,000
+return\n8,281,885,,568,931,443,461,351,806,\n56,462,180,,040,062,344,145,894,080,\n19,846,635,,030,046,758,109,420,560
+note right of ec36cd5f: \n5,630 gas
+7d27c7a9 --[#3471CD]> 030b854e: burn(\nuser: 0x7976..792f,\nreceiverOfUnderlying: 0x7976..792f,\namount: 89,064,,046,218,805,695,728,115,\nindex: 1,009,597,511,,155,776,128,044,117,666)\n13,319 gas
+activate 030b854e
+030b854e ->> 541d01f4: burn(\nuser: 0x7976..792f,\nreceiverOfUnderlying: 0x7976..792f,\namount: 89,064,,046,218,805,695,728,115,\nindex: 1,009,597,511,,155,776,128,044,117,666)\n12,696 gas
+activate 541d01f4 #809ECB
+030b854e --[#3471CD]> d784f6b5: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 884,975,,804,924,838,290,951,578,\nuserBalance: 88,217,,378,940,292,904,516,279)\n1,771 gas
+activate d784f6b5
+d784f6b5 ->> d9edce31: handleAction(\nuser: 0x7976..792f,\ntotalSupply: 884,975,,804,924,838,290,951,578,\nuserBalance: 88,217,,378,940,292,904,516,279)\n1,154 gas
+activate d9edce31 #809ECB
+return
+return
+note right of d784f6b5: \n617 gas
+030b854e -[#3471CD]> c02a6cc2: transfer(\ndst: 0x7976..792f,\nwad: 89,064,,046,218,805,695,728,115)\n3,262 gas
+activate c02a6cc2
+return\ntrue
+return
+note right of 541d01f4: \n7,663 gas
+return
+note right of 030b854e: \n623 gas
+return\n1,009,597,511,,155,776,128,044,117,666
+return\n1,009,597,511,,155,776,128,044,117,666
+note right of 7d27c7a9: \n611 gas
+return\n89,064,,046,218,805,695,728,115
+note right of 541d01f4: \n1,246 gas
+return\n89,064,,046,218,805,695,728,115
+note right of 030b854e: \n611 gas
+return\n89,064,,046,218,805,695,728,115
+note right of c6845baf: \n24,282 gas
+return\n89,064,,046,218,805,695,728,115
+note right of 7d27c7a9: \n620 gas
+7976792f -> c02a6cc2: transfer(\ndst: 0xBA12..F2C8,\nwad: 89,064,,046,218,805,695,728,115)\n3,262 gas
+activate c02a6cc2
+return\ntrue
+return
+note right of 7976792f: \n27,240 gas
+ba12f2c8 -> c02a6cc2: balanceOf(\n0xBA12..F2C8)\n534 gas
+activate c02a6cc2
+return\n89,064,,046,218,805,695,728,115
+return
+note right of ba12f2c8: \n18,157 gas
+return
+note right of 7976792f: \n30,952 gas
+
+note over a0b8eb48 #aqua
+Transfer:
+from: 0x39AA..7563,
+to: 0xD556..B735,
+value: 9,553,766,872,333
+Transfer:
+from: 0xD556..B735,
+to: 0x7976..792f,
+value: 9,719,938,773,954
+Transfer:
+from: 0x7976..792f,
+to: 0x0A59..2199,
+value: 9,719,938,773,955
+end note
+note over 6b171d0f #aqua
+Transfer:
+src: 0x0281..68A3,
+dst: 0x7976..792f,
+wad: 9,800,000,,000,000,000,000,000,000
+Transfer:
+src: 0x7976..792f,
+dst: 0xA2a3..9d6E,
+wad: 9,800,000,,192,571,004,713,351,804
+Transfer:
+src: 0xA2a3..9d6E,
+dst: 0x0281..68A3,
+wad: 10,086,617,,575,934,659,408,267,298
+Transfer:
+src: 0x0000..0000,
+dst: 0x7976..792f,
+wad: 9,719,938,,773,955,000,000,000,000
+Transfer:
+src: 0x6059..A270,
+dst: 0x7976..792f,
+wad: 80,062,,000,000,000,000,000,000
+Transfer:
+src: 0x7976..792f,
+dst: 0x0281..68A3,
+wad: 9,800,000,,000,000,000,000,000,000
+end note
+note over c02a6cc2 #aqua
+Deposit:
+dst: 0x7976..792f,
+wad: 94,,999,803,993,306,825,565
+Transfer:
+src: 0xBA12..F2C8,
+dst: 0x7976..792f,
+wad: 89,064,,046,218,805,695,728,115
+Transfer:
+src: 0x7976..792f,
+dst: 0x030b..854e,
+wad: 89,064,,046,218,805,695,728,115
+Transfer:
+src: 0x7976..792f,
+dst: 0x6059..A270,
+wad: 67,,699,403,357,779,992,485
+Transfer:
+src: 0x030b..854e,
+dst: 0x7976..792f,
+wad: 89,064,,046,218,805,695,728,115
+Transfer:
+src: 0x7976..792f,
+dst: 0xBA12..F2C8,
+wad: 89,064,,046,218,805,695,728,115
+end note
+note over ba12f2c8 #aqua
+FlashLoan:
+recipient: 0x7976..792f,
+token: 0xC02a..6Cc2,
+amount: 89,064,,046,218,805,695,728,115,
+feeAmount: 0
+end note
+note over 7d27c7a9 #aqua
+ReserveDataUpdated:
+reserve: 0xC02a..6Cc2,
+liquidityRate: 6,714,607,,230,668,197,025,326,538,
+stableBorrowRate: 53,824,340,,508,630,674,595,231,123,
+variableBorrowRate: 17,868,255,,381,473,005,946,423,341,
+liquidityIndex: 1,009,597,511,,155,776,128,044,117,666,
+variableBorrowIndex: 1,016,470,923,,779,117,221,149,236,238
+ReserveUsedAsCollateralEnabled:
+reserve: 0xC02a..6Cc2,
+user: 0x7976..792f
+Deposit:
+reserve: 0xC02a..6Cc2,
+user: 0x7976..792f,
+onBehalfOf: 0x7976..792f,
+amount: 89,064,,046,218,805,695,728,115,
+referral: 
+ReserveDataUpdated:
+reserve: 0x6B17..1d0F,
+liquidityRate: 6,542,489,,855,209,331,019,539,462,
+stableBorrowRate: 109,268,249,,034,028,952,099,185,673,
+variableBorrowRate: 18,536,498,,068,057,904,198,371,346,
+liquidityIndex: 1,074,250,075,,310,718,346,570,481,280,
+variableBorrowIndex: 1,117,503,516,,916,264,619,791,192,124
+Borrow:
+reserve: 0x6B17..1d0F,
+user: 0x7976..792f,
+onBehalfOf: 0x7976..792f,
+amount: 9,800,000,,000,000,000,000,000,000,
+borrowRateMode: 2,
+borrowRate: 18,536,498,,068,057,904,198,371,346,
+referral: 
+ReserveDataUpdated:
+reserve: 0x6B17..1d0F,
+liquidityRate: 6,178,417,,215,942,977,279,775,417,
+stableBorrowRate: 108,997,250,,414,115,267,006,958,592,
+variableBorrowRate: 17,994,500,,828,230,534,013,917,185,
+liquidityIndex: 1,074,250,075,,310,718,346,570,481,280,
+variableBorrowIndex: 1,117,503,516,,916,264,619,791,192,124
+Deposit:
+reserve: 0x6B17..1d0F,
+user: 0xA2a3..9d6E,
+onBehalfOf: 0xA2a3..9d6E,
+amount: 10,086,617,,575,934,659,408,267,298,
+referral: 36
+ReserveDataUpdated:
+reserve: 0x6B17..1d0F,
+liquidityRate: 5,301,861,,682,444,124,988,826,565,
+stableBorrowRate: 108,287,035,,294,486,951,931,513,489,
+variableBorrowRate: 16,574,070,,588,973,903,863,026,979,
+liquidityIndex: 1,074,250,075,,310,718,346,570,481,280,
+variableBorrowIndex: 1,117,503,516,,916,264,619,791,192,124
+Repay:
+reserve: 0x6B17..1d0F,
+user: 0x7976..792f,
+repayer: 0x7976..792f,
+amount: 9,800,000,,000,000,000,000,000,000
+ReserveDataUpdated:
+reserve: 0xC02a..6Cc2,
+liquidityRate: 8,281,885,,568,931,443,461,351,806,
+stableBorrowRate: 56,462,180,,040,062,344,145,894,080,
+variableBorrowRate: 19,846,635,,030,046,758,109,420,560,
+liquidityIndex: 1,009,597,511,,155,776,128,044,117,666,
+variableBorrowIndex: 1,016,470,923,,779,117,221,149,236,238
+ReserveUsedAsCollateralDisabled:
+reserve: 0xC02a..6Cc2,
+user: 0x7976..792f
+Withdraw:
+reserve: 0xC02a..6Cc2,
+user: 0x7976..792f,
+to: 0x7976..792f,
+amount: 89,064,,046,218,805,695,728,115
+end note
+note over 030b854e #aqua
+Transfer:
+from: 0x0000..0000,
+to: 0x464C..e18c,
+value: 40,161,004,778,624,723
+Mint:
+from: 0x464C..e18c,
+value: 40,161,004,778,624,723,
+index: 1,009,597,511,,155,776,128,044,117,666
+Transfer:
+from: 0x0000..0000,
+to: 0x7976..792f,
+value: 89,064,,046,218,805,695,728,115
+Mint:
+from: 0x7976..792f,
+value: 89,064,,046,218,805,695,728,115,
+index: 1,009,597,511,,155,776,128,044,117,666
+Transfer:
+from: 0x7976..792f,
+to: 0x0000..0000,
+value: 89,064,,046,218,805,695,728,115
+Burn:
+from: 0x7976..792f,
+target: 0x7976..792f,
+value: 89,064,,046,218,805,695,728,115,
+index: 1,009,597,511,,155,776,128,044,117,666
+end note
+note over 6c3c379d #aqua
+Transfer:
+from: 0x0000..0000,
+to: 0x7976..792f,
+value: 9,800,000,,000,000,000,000,000,000
+Mint:
+from: 0x7976..792f,
+onBehalfOf: 0x7976..792f,
+value: 9,800,000,,000,000,000,000,000,000,
+index: 1,117,503,516,,916,264,619,791,192,124
+Transfer:
+from: 0x7976..792f,
+to: 0x0000..0000,
+value: 9,800,000,,000,000,000,000,000,000
+Burn:
+user: 0x7976..792f,
+amount: 9,800,000,,000,000,000,000,000,000,
+index: 1,117,503,516,,916,264,619,791,192,124
+end note
+note over 028168a3 #aqua
+Transfer:
+from: 0x0000..0000,
+to: 0x464C..e18c,
+value: 19,,044,551,812,628,007,784
+Mint:
+from: 0x464C..e18c,
+value: 19,,044,551,812,628,007,784,
+index: 1,074,250,075,,310,718,346,570,481,280
+Transfer:
+from: 0x0000..0000,
+to: 0xA2a3..9d6E,
+value: 10,086,617,,575,934,659,408,267,298
+Mint:
+from: 0xA2a3..9d6E,
+value: 10,086,617,,575,934,659,408,267,298,
+index: 1,074,250,075,,310,718,346,570,481,280
+end note
+note over e2f235a5 #aqua
+Swapped:
+swapper: 0x7976..792f,
+input: 0x6B17..1d0F,
+output: 0xA0b8..eB48,
+outputAmount: 9,719,938,773,954,
+scaledFee: 1,955,,982,953,648,568,272,834,
+recipient: 0x7976..792f
+end note
+note over a2a39d6e #aqua
+Deposit:
+_bAsset: 0x6B17..1d0F,
+_pToken: 0x0281..68A3,
+_amount: 10,086,617,,575,934,659,408,267,298
+end note
+note over d556b735 #aqua
+PlatformWithdrawal:
+bAsset: 0xA0b8..eB48,
+pToken: 0x39AA..7563,
+totalAmount: 9,553,766,872,333,
+userAmount: 9,719,938,773,954
+end note
+note over 39aa7563 #aqua
+AccrueInterest:
+interestAccumulated: 26,453,605,
+borrowIndex: 1,,241,378,093,228,689,210,
+totalBorrows: 281,878,630,276,082
+Transfer:
+from: 0xD556..B735,
+to: 0x39AA..7563,
+amount: 42,233,145,331,725,066
+Redeem:
+redeemer: 0xD556..B735,
+redeemAmount: 9,553,766,872,333,
+redeemTokens: 42,233,145,331,725,066
+end note
+note over 3d98cd3b #aqua
+DistributedSupplierComp:
+cToken: 0x39AA..7563,
+supplier: 0xD556..B735,
+compDelta: 7,,259,483,533,833,059,606,
+compSupplyIndex: 43,237,758,843,978,603,576,427,,811,981,683,473,834,736
+end note
+note over 89b7cc5a #aqua
+SellGem:
+owner: 0x7976..792f,
+value: 9,719,938,773,955,
+fee: 0
+end note
+@endumls
